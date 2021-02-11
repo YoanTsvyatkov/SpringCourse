@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/head::head('Recipes')"></head>
+<h1>Add recipe</h1>
+<body>
+<div class="container">
+    <h3>Add Recipe</h3>
+    <form th:object="${recipe}" th:action="@{/recipe-form}" method="post"
+          enctype="multipart/form-data">
+        <div th:if="${recipe.getId()} != null" class="form-group row">
+            <div class="col-sm-10">
+                <input type="text" th:value="*{id}" id="id" name="id"
+                       class="form-control" title="Article Id" hidden>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="name">Recipe Name: </label>
+            <input id="name" type="text" th:field="*{recipeName}"
+                   placeholder="Enter recipe name ..."/>
+            <p th:if="${#fields.hasErrors('recipeName')}" th:errors="*{recipeName}" class="errors alert alert-danger">
+                Incorrect name
+            </p>
+        </div>
+        <div class="form-group">
+            <label for="name">Short description:</label>
+            <input id="short-description" type="text" th:field="*{shortDescription}"
+                   placeholder="Enter short description..."/>
+            <p th:if="${#fields.hasErrors('shortDescription')}" th:errors="*{shortDescription}"
+               class="errors alert alert-danger">
+                Incorrect Short Description
+            </p>
+        </div>
+        <div class="form-group">
+            <label for="name">Time of preparation:</label>
+            <input id="time-of-preparation" type="number" th:field="*{timeOfPreparation}"
+                   placeholder="Enter time of preparation..."/>
+            <p th:if="${#fields.hasErrors('timeOfPreparation')}" th:errors="*{timeOfPreparation}"
+               class="errors alert alert-danger">
+                Incorrect Time of preparation
+            </p>
+        </div>
+        <div class="form-group">
+            <label for="name">Full description: </label>
+            <input id="full-description" type="text" th:field="*{fullDescription}"
+                   placeholder="Enter full description..."/>
+            <p th:if="${#fields.hasErrors('fullDescription')}" th:errors="*{fullDescription}"
+               class="errors alert alert-danger">
+                Incorrect Full Description
+            </p>
+        </div>
+        <div class="custom-file">
+            <input type="file" id="file" name="file" class="custom-file-input" th:value="*{photo}">
+            <label th:text="${#strings.isEmpty(recipe.photo)}? 'Choose file' : *{photo}"
+                   class="custom-file-label" for="file">Choose picture file</label>
+        </div>
+
+        <p th:if="${#fields.hasErrors('photo')}" th:errors="*{photo}"
+           class="errors alert alert-danger">
+            Incorrect Photo
+        </p>
+
+<!--        <input type="hidden" th:value="*{photo}" id="pictureUrl" name="pictureUrl" title="Recipe picture URL">-->
+        <input type="hidden" th:value="*{created}" id="created" name="created" title="Recipe creation date and time">
+        <input type="hidden" th:value="*{modified}" id="modified" name="modified" title="Recipe last modification date and timeL">
+
+
+        <p th:if="${fileError != null}" class="errors alert alert-danger offset-sm-2 col-sm-10">
+            <span th:text="${fileError}"></span>
+        </p>
+
+<!--        <input type="hidden" th:value="*{photo}" id="pictureUrl" name="pictureUrl" title="Recipe picture URL">-->
+
+        <p>
+            <input type="submit" value="Submit"/>
+            <input type="reset" value="Reset"/>
+        </p>
+    </form>
+</div>
+</body>
+</html>

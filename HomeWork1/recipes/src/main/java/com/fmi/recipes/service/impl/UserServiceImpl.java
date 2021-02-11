@@ -50,12 +50,12 @@ public class UserServiceImpl implements UserService {
             throw new InvalidEntityDataException(String.format("Name %s is already taken", user.getName()));
         }
 
-        if(user.getGender() == null){
+        if (user.getGender() == null) {
             user.setGender("Male");
         }
 
-        if(user.getPhoto()  == null){
-            user.setPhoto((user.getGender().equals("Male") ? maleUrl: femaleUrl));
+        if (user.getPhoto() == null) {
+            user.setPhoto((user.getGender().equals("Male") ? maleUrl : femaleUrl));
         }
 
         PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();

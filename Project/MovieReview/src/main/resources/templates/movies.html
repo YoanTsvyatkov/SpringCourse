@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>Movie title</th>
+        <th>Description</th>
+        <th>Photo</th>
+        <th>Release date</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="row: ${movies}">
+        <td th:text="${row.movieTitle}"></td>
+        <td th:text="${row.description}"></td>
+        <td th:text="${row.moviePhoto}"></td>
+        <td th:text="${#dates.format(row.releaseDate, 'dd-MMM-yyyy')}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

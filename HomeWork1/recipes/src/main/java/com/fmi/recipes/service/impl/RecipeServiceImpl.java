@@ -56,7 +56,7 @@ public class RecipeServiceImpl implements RecipeService {
         String name = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userService.getUserByUsername(name);
 
-        if(user.getRole() == Role.USER && !user.getId().equals(recipe.getUserId())){
+        if (user.getRole() == Role.USER && !user.getId().equals(recipe.getUserId())) {
             throw new InvalidOperationException("Unauthorised deletion");
         }
 
@@ -73,7 +73,7 @@ public class RecipeServiceImpl implements RecipeService {
         String name = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userService.getUserByUsername(name);
 
-        if(user.getRole() == Role.USER && !user.getId().equals(recipe.getUserId())){
+        if (user.getRole() == Role.USER && !user.getId().equals(recipe.getUserId())) {
             throw new InvalidOperationException("Unauthorised update");
         }
 

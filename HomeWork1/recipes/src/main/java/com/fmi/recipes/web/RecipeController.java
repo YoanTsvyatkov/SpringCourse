@@ -22,13 +22,13 @@ public class RecipeController {
     RecipeService recipeService;
 
     @GetMapping
-    List<Recipe> getRecipes(){
+    List<Recipe> getRecipes() {
         return recipeService.getRecipes();
     }
 
     @PostMapping
-    ResponseEntity<Recipe> addRecipe(@Valid @RequestBody Recipe recipe, Errors errors){
-        if(errors.hasErrors()){
+    ResponseEntity<Recipe> addRecipe(@Valid @RequestBody Recipe recipe, Errors errors) {
+        if (errors.hasErrors()) {
             throw new InvalidEntityDataException("Invalid recipe data", getViolationsAsStringList(errors));
         }
 
@@ -41,18 +41,18 @@ public class RecipeController {
     }
 
     @GetMapping("/{id}")
-    Recipe getRecipeById(@PathVariable String id){
+    Recipe getRecipeById(@PathVariable String id) {
         return recipeService.getRecipeById(id);
     }
 
     @DeleteMapping("/{id}")
-    Recipe deletePostById(@PathVariable String id){
+    Recipe deletePostById(@PathVariable String id) {
         return recipeService.deleteRecipe(id);
     }
 
     @PutMapping("/{id}")
-    Recipe putRecipeById(@PathVariable String id, @Valid @RequestBody Recipe recipe, Errors errors){
-        if(errors.hasErrors()){
+    Recipe putRecipeById(@PathVariable String id, @Valid @RequestBody Recipe recipe, Errors errors) {
+        if (errors.hasErrors()) {
             throw new InvalidEntityDataException("Invalid recipe data", getViolationsAsStringList(errors));
         }
 

@@ -1,6 +1,6 @@
 package com.fmi.recipes.exception;
 
-public class UnexistingEntityException extends RuntimeException{
+public class UnexistingEntityException extends RuntimeException {
     public UnexistingEntityException() {
         super();
     }

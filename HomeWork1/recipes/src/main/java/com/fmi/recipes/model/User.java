@@ -36,7 +36,6 @@ public class User implements UserDetails {
     private String username;
 
     @NonNull
-    @NotNull
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Pattern(regexp = "(\\w*\\d+\\w*[^A-Za-z\\d]+\\w*|\\w*[^A-Za-z\\d]+\\w*\\d+\\w*)",
             message = "Password must contain 1 digit, and one special symbol")
@@ -78,8 +77,8 @@ public class User implements UserDetails {
     @JsonIgnore
     @Override
     public boolean isAccountNonExpired() {
-       return status == Status.ACTIVE ||
-               status == Status.DEACTIVATED;
+        return status == Status.ACTIVE ||
+                status == Status.DEACTIVATED;
     }
 
     @JsonIgnore

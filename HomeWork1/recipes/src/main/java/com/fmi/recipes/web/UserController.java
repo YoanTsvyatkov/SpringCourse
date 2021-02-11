@@ -24,13 +24,13 @@ public class UserController {
     UserService userService;
 
     @GetMapping
-    List<User> getUsers(){
+    List<User> getUsers() {
         return userService.getUsers();
     }
 
     @PostMapping
-    ResponseEntity<User> addUser(@Valid @RequestBody User user, Errors errors){
-        if(errors.hasErrors()){
+    ResponseEntity<User> addUser(@Valid @RequestBody User user, Errors errors) {
+        if (errors.hasErrors()) {
             throw new InvalidEntityDataException("Invalid user data", getViolationsAsStringList(errors));
         }
 
@@ -43,18 +43,18 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    User getUserById(@PathVariable String id){
+    User getUserById(@PathVariable String id) {
         return userService.getUserById(id);
     }
 
     @DeleteMapping("/{id}")
-    User deleteUserById(@PathVariable String id){
+    User deleteUserById(@PathVariable String id) {
         return userService.deleteUser(id);
     }
 
     @PutMapping("/{id}")
-    User updateUser(@PathVariable String id, @Valid @RequestBody User user, Errors errors){
-        if(errors.hasErrors()){
+    User updateUser(@PathVariable String id, @Valid @RequestBody User user, Errors errors) {
+        if (errors.hasErrors()) {
             throw new InvalidEntityDataException("Invalid user data", getViolationsAsStringList(errors));
         }
 

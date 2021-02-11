@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/head::head('Users')"></head>
+<h1>Add user</h1>
+<body>
+<div class="container">
+    <h3>Add User</h3>
+
+    <form th:object="${user}" th:action="@{/user-form}" method="post"
+          enctype="multipart/form-data">
+        <div th:if="${user.getId()} != null" class="form-group row">
+            <div class="col-sm-10">
+                <input type="text" th:value="*{id}" id="id" name="id"
+                       class="form-control" title="User Id" hidden>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="username">Username: </label>
+            <input id="username" type="text" th:field="*{username}"
+                   placeholder="Enter username ..."/>
+            <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="errors alert alert-danger">
+                Incorrect username
+            </p>
+        </div>
+        <div class="form-group">
+            <label for="name">Name: </label>
+            <input id="name" type="text" th:field="*{name}"
+                   placeholder="Enter name..."/>
+            <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+               class="errors alert alert-danger">
+                Incorrect name
+            </p>
+        </div>
+        <div class="form-group">
+            <label for="name">Description: </label>
+            <input id="full-description" type="text" th:field="*{description}"
+                   placeholder="Enter profile description..."/>
+            <p th:if="${#fields.hasErrors('description')}" th:errors="*{description}"
+               class="errors alert alert-danger">
+                Incorrect Full Description
+            </p>
+        </div>
+
+        <div class="form-group row">
+            <label for="password">Password: </label>
+            <input id="password" type="password" th:field="*{password}"
+                   placeholder="Enter password..."
+                    />
+            <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
+               class="errors alert alert-danger">
+                Incorrect Password
+            </p>
+        </div>
+
+        <div class="custom-file">
+            <input type="file" id="file" name="file" class="custom-file-input" th:value="*{image}">
+            <label th:text="${#strings.isEmpty(user.image)}? 'Choose file' : *{image}"
+                   class="custom-file-label" for="file">Choose picture file</label>
+        </div>
+
+        <p th:if="${#fields.hasErrors('image')}" th:errors="*{image}"
+           class="errors alert alert-danger">
+            Incorrect Photo
+        </p>
+
+<!--        <input type="hidden" th:value="*{photo}" id="pictureUrl" name="pictureUrl" title="Recipe picture URL">-->
+        <input type="hidden" th:value="*{created}" id="created" name="created" title="Recipe creation date and time">
+        <input type="hidden" th:value="*{modified}" id="modified" name="modified" title="Recipe last modification date and time">
+
+<!--        <input type="hidden" th:value="*{photo}" id="pictureUrl" name="pictureUrl" title="Recipe picture URL">-->
+
+        <p>
+            <input type="submit" value="Submit"/>
+            <input type="reset" value="Reset"/>
+        </p>
+    </form>
+</div>
+</body>
+</html>

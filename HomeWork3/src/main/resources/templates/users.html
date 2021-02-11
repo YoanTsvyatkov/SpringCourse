@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:replace="fragments/head::head('Users')"></head>
+<body>
+<div th:replace="fragments/menu::menu(${path})"></div>
+<div class="container">
+    <h3>Table list</h3>
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th>Name</th>
+            <th>Username</th>
+            <th>Description</th>
+            <th>Photo</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <form method="post">
+            <tr th:each="row: ${users}">
+                <td th:text="${row.name}"></td>
+                <td th:text="${row.username}"></td>
+                <td th:text="${row.description}"></td>
+                <td>
+                    <a href="#"  data-toggle="modal" data-target="#exampleModal"
+                       th:data-image-url="${'/uploads/' + row.image}"
+                       th:data-image-title="${row.image}">
+                        <img class="img-thumbnail"
+                             th:src="${row.image != null} ? ${'/uploads/' + row.image}: ${'/uploads/' + 'profile_default.png'}">
+                    </a>
+                </td>
+                <td>
+                    <button
+                            sec:authorize="isAuthenticated()"
+                            type="submit" class="btn btn-primary" name="edit" th:value="${row.id}"><i class="fas fa-edit"></i></button>
+                    <button
+                            sec:authorize="isAuthenticated()"
+                            type="submit" class="btn btn-danger" name="delete" th:value="${row.id}"><i class="fas fa-trash-alt"></i></button>
+                </td>
+            </tr>
+        </form>
+        </tbody>
+    </table>
+</div>
+<div th:replace="fragments/foot::foot"></div>
+</body>
+</html>

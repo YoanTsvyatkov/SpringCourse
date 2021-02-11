@@ -67,7 +67,7 @@ public class Initializer implements CommandLineRunner {
             recipes.forEach(recipe -> recipeRepository.save(recipe));
         }
 
-        if(userService.getSize() == 0){
+        if (userService.getSize() == 0) {
             users.forEach(user -> userService.addUser(user));
         }
     }
